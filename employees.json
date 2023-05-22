@@ -4,7 +4,7 @@
   "surname" : "Никифоров",
   "name" : "Семен",
   "patronymic" : "Алексеевич",
-  "birthdate" : "2002-11-10",
+  "birthdate" : "1984-11-10",
   "birthplace" : {
     "country" : "Россия",
     "city" : "Саратов",
@@ -17,8 +17,8 @@
   "divisionCode" : "777-555",
   "post" : {
     "C# разработчик" : {
-      "start" : "2023-02-09",
-      "finish" : "2002-12-09"
+      "start" : "2005-02-09",
+      "finish" : "2023-12-09"
     }
   },
   "placesOfLiving" : [ {
@@ -318,7 +318,7 @@
   "surname" : "Щербакова",
   "name" : "Анна",
   "patronymic" : "Станиславовна",
-  "birthdate" : "2002-11-09",
+  "birthdate" : "1990-11-09",
   "birthplace" : {
     "country" : "Россия",
     "city" : "Саратов",
@@ -331,8 +331,8 @@
   "divisionCode" : "777-555",
   "post" : {
     "C# разработчик" : {
-      "start" : "2023-02-09",
-      "finish" : "2002-12-09"
+      "start" : "2010-02-09",
+      "finish" : "2022-12-09"
     }
   },
   "placesOfLiving" : [ {

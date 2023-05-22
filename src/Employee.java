@@ -5,8 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 //@JsonIgnoreProperties(ignoreUnknown = true)
-public class Employee {
+public class Employee implements Comparable <Employee>{
     int id;
     int passNumber;
     String surname;
@@ -66,6 +68,33 @@ public class Employee {
                 "Занимаемые должности: "+post+"\n"+
                 "Адреса проживания: "+placesOfLiving+"\n"+
                 "Телефоны: "+phoneList;
+    }
+
+        public int maxYearsPosition(){
+        int max = 0;
+        for (Map.Entry<String, Period> entry :
+                post.entrySet()) {
+            int curPeriod = entry.getValue().finish.get(Calendar.YEAR) - entry.getValue().start.get(Calendar.YEAR);
+            if(curPeriod > max){
+                max = curPeriod;
+            }
+        }
+        return max;
+    }
+    public int GeneralExperience(){
+        int experience = 0;
+        for (Map.Entry<String, Period> entry :
+                post.entrySet()) {
+            int curPeriod = entry.getValue().finish.get(Calendar.YEAR) - entry.getValue().start.get(Calendar.YEAR);
+            experience += curPeriod;
+        }
+        return experience;
+    }
+    @Override
+    public int compareTo(Employee other) {
+        if (GeneralExperience() > other.GeneralExperience()) return 1;
+        else if (GeneralExperience() < other.GeneralExperience()) return -1;
+        else return 0;
     }
     public int getPassNumber() {
         return passNumber;

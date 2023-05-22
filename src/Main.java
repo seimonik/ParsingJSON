@@ -4,11 +4,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
+import static java.lang.Math.max;
 
 public class Main {
     public static void main(String[] args) throws ParseException, IOException {
@@ -16,8 +19,8 @@ public class Main {
 
         // 1 работник
         HashMap<String, Period> post = new HashMap<>();
-        Period periods = new Period(new GregorianCalendar(2023,01,10),
-                new GregorianCalendar(2002,11,10));
+        Period periods = new Period(new GregorianCalendar(2005,01,10),
+                new GregorianCalendar(2023,11,10));
         post.put("C# разработчик", periods);
 
         List<AddressPeriod> address = new ArrayList<>();
@@ -28,7 +31,7 @@ public class Main {
         HashMap<String, PhoneType> phoneList = new HashMap<>();
         phoneList.put("+8777578204", PhoneType.MobilePhone);
         employeeList.add(new Employee(1, 780053, "Никифоров", "Семен", "Алексеевич",
-                        new GregorianCalendar(2002,10,11),
+                        new GregorianCalendar(1984,10,11),
                 new Address("Россия", "Саратов", "Московская", "77", 7),
                 "6257 959547", new GregorianCalendar(2022,10,11),
                 "777-555", post, address, phoneList));
@@ -183,8 +186,8 @@ public class Main {
 
         // 7 работник
         post = new HashMap<>();
-        periods = new Period(new GregorianCalendar(2023,01,10),
-                new GregorianCalendar(2002,11,10));
+        periods = new Period(new GregorianCalendar(2010,01,10),
+                new GregorianCalendar(2022,11,10));
         post.put("C# разработчик", periods);
 
         address = new ArrayList<>();
@@ -195,7 +198,7 @@ public class Main {
         phoneList = new HashMap<>();
         phoneList.put("+8777578204", PhoneType.MobilePhone);
         employeeList.add(new Employee(7, 305173, "Щербакова", "Анна", "Станиславовна",
-                new GregorianCalendar(2002,10,10),
+                new GregorianCalendar(1990,10,10),
                 new Address("Россия", "Саратов", "Московская", "77", 7),
                 "6257 959547", new GregorianCalendar(2022,10,11),
                 "777-555", post, address, phoneList));
@@ -345,7 +348,59 @@ public class Main {
         byte[] jsonData = Files.readAllBytes(Paths.get("employees.json"));
         ObjectMapper mapperBack = new ObjectMapper();
         Employee[] resultBack = mapperBack.readValue(jsonData, Employee[].class);
-        for (Employee employee : resultBack)
-            System.out.println(employee + "\n");
+//        for (Employee employee : resultBack)
+//            System.out.println(employee + "\n");
+
+        // <------------------------------lambda--------------------------------->
+
+        // На основе списка сотрудников, считанных из json файла. Отобрать в отдельный список:
+        List<Employee> res = Arrays.stream(resultBack).toList();
+        // сотрудников с количеством лет на одной должности больше заданного
+//        List<Employee> yearsMore = new ArrayList<>();
+//        int numberOfYears = 2;
+//
+//        yearsMore =  res.stream()
+//                .filter(c -> c.maxYearsPosition() > numberOfYears)
+//                .collect(Collectors.toList());
+//
+//        for (Employee employee : yearsMore)
+//            System.out.println(employee + "\n");
+
+        //сотрудников с общим стажем в компании больше заданного
+//        List<Employee> generalExperienceMore = new ArrayList<>();
+//        int experience = 6;
+//
+//        generalExperienceMore =  res.stream()
+//                .filter(c -> c.GeneralExperience() > experience)
+//                .collect(Collectors.toList());
+//
+//        for (Employee employee : generalExperienceMore)
+//            System.out.println(employee + "\n");
+
+        // сотрудников с максимальным количеством лет стажа в компании
+//        List<Employee> maxExperienceList = new ArrayList<>();
+//        int maxExperience = 0;
+//        for (Employee emp :res)
+//            maxExperience = max(maxExperience, emp.GeneralExperience());
+//
+//        int finalmaxExperience = maxExperience;
+//        maxExperienceList =  res.stream()
+//                .filter(c -> c.GeneralExperience() == finalmaxExperience)
+//                .collect(Collectors.toList());
+//
+//        for (Employee employee : maxExperienceList)
+//            System.out.println(employee + "\n");
+//
+//        //отсортировать сотрудников по длительности работы в компании
+//        List<Employee> experienceSorted = new ArrayList<>();
+//
+//        experienceSorted =  res.stream()
+//                .sorted((c1, c2) -> c1.compareTo(c2))
+//                .collect(Collectors.toList());
+//
+//        for (Employee employee : experienceSorted) {
+////            System.out.println(employee + "\n");
+//            System.out.println(employee + "\nСТАЖ " + employee.GeneralExperience() + "\n");
+//        }
     }
 }
